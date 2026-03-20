@@ -1,15 +1,23 @@
 import Link from "next/link";
 
 import Input from "@/components/input/input";
-import "@/app/(authentication)/login/login.css"
+import "@/app/(authentication)/login/login.css";
 
-export default function LoginPage() {
+export default function RegisterPage() {
     return (
         <div className="container">
             <form className="card">
                 <div className="font-roboto">
-                    <h2>Welcome Back</h2>
-                    <p>Step into ethereal workspace</p>
+                    <h2>Create Account</h2>
+                    <p>Join the next generation of digital workspace.</p>
+                </div>
+                <div>
+                    <label htmlFor="name">FULL NAME</label>
+                    <Input
+                        type="text"
+                        placeholder="Enter your full name"
+                        icon={<span className="icon">�</span>}
+                    />
                 </div>
                 <div>
                     <label htmlFor="email">EMAIL ADDRESS</label>
@@ -22,12 +30,6 @@ export default function LoginPage() {
                 <div>
                     <div>
                         <label htmlFor="password">PASSWORD</label>
-                        <Link
-                            href="/forgot-password"
-                            className="forgot-link font-plus-jakarta-sans"
-                        >
-                            FORGOT?
-                        </Link>
                     </div>
                     <Input
                         type="password"
@@ -35,12 +37,12 @@ export default function LoginPage() {
                         icon={<span className="icon">🔒</span>}
                     />
                 </div>
-                <button className="btn">Sign In</button>
+                <button className="btn">Sign Up</button>
             </form>
             <div>
                 <p className="auth font-plus-jakarta-sans">
-                    {`Don't have an account?`}{" "}
-                    <Link href="/register" >Sign up</Link>
+                    {`Already have an account?`}{" "}
+                    <Link href="/login">Sign in</Link>
                 </p>
             </div>
         </div>
