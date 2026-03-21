@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import Input from "@/components/input/input";
-import "@/app/(authentication)/login/login.css";
+import "@/app/(authentication)/auth.css";
 
 export default function ForgotPasswordPage() {
     return (
@@ -14,25 +14,16 @@ export default function ForgotPasswordPage() {
                 <div>
                     <label htmlFor="email">EMAIL ADDRESS</label>
                     <Input
+                        name="email"
                         type="email"
                         placeholder="Enter your email"
                         icon={<span className="icon">📧</span>}
                     />
                 </div>
-                <div>
-                    <div>
-                        <label htmlFor="password">PASSWORD</label>
-                    </div>
-                    <Input
-                        type="password"
-                        placeholder="Enter your password"
-                        icon={<span className="icon">🔒</span>}
-                    />
-                </div>
-                <button className="btn">Reset Password</button>
+                <button className="btn">Send Reset Link</button>
             </form>
             <div>
-                <p className="auth font-plus-jakarta-sans">
+                <p className="auth ">
                     {`Back to`}{" "}
                     <Link href="/login">Sign in</Link>
                 </p>

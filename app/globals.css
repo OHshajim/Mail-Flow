@@ -14,7 +14,7 @@
 /* Inter */
 @font-face {
   font-family: 'Inter';
-  src: url('/public/font-family/Inter/Inter-VariableFont_opsz\,wght.woff2') format('woff2');
+  src: url('/public/font-family/Inter/Inter-VariableFont_opsz\,wght.ttf') format('ttf');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -23,23 +23,12 @@
 /* roboto*/
 @font-face {
   font-family: 'Roboto';
-  src: url('/public/font-family/Roboto/Roboto-VariableFont_wdth\,wght.woff2') format('woff2');
+  src: url('/public/font-family/Roboto/Roboto-VariableFont_wdth\,wght.ttf') format('ttf');
   font-weight: 400;
   font-display: swap;
 }
 .font-roboto {
   font-family: 'Roboto', sans-serif;
-}
-
-/* PlusJakartaSans */
-@font-face {
-  font-family: 'PlusJakartaSans';
-  src: url('/public/font-family/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-.font-plus-jakarta-sans {
-  font-family: 'PlusJakartaSans', sans-serif;
 }
 
 
@@ -76,10 +65,42 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: auto;
 }
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+/* Button */
+.btn {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+
+  width: 100%;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+
+  backdrop-filter: blur(24px);
+  box-shadow: 0px 32px 64px -12px rgba(106, 56, 211, 0.12);
+  background: linear-gradient(135deg, #6A38D3 0%, #5D27C7 100%);
+
+  transition: all 0.3s ease;
+}
+
+/* Button Hover */
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0px 40px 80px -10px rgba(106, 56, 211, 0.3);
+}
+
+/* Button Click */
+.btn:active {
+  transform: scale(0.98);
 }
 

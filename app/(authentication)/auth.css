@@ -107,38 +107,10 @@ label {
     align-items: center;
 }
 
-/* Button */
-.btn {
-    margin-top: 10px;
-    padding: 12px;
-    border-radius: 9999px;
-    border: none;
-    cursor: pointer;
 
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-
-    backdrop-filter: blur(24px);
-    box-shadow: 0px 32px 64px -12px rgba(106, 56, 211, 0.12);
-    background: linear-gradient(135deg, #6A38D3 0%, #5D27C7 100%);
-
-    transition: all 0.3s ease;
-}
-
-/* Button Hover */
-.btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0px 40px 80px -10px rgba(106, 56, 211, 0.3);
-}
-
-/* Button Click */
-.btn:active {
-    transform: scale(0.98);
-}
 
 /* Bottom text */
-.container>div {
+.auth {
     margin-top: 20px;
     font-size: 14px;
     color: #aaa;

@@ -1,12 +1,26 @@
+"use client";
+
 import Link from "next/link";
 
 import Input from "@/components/input/input";
-import "@/app/(authentication)/login/login.css";
+import "@/app/(authentication)/auth.css";
 
 export default function RegisterPage() {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            password: formData.get("password"),
+        };
+
+        console.log(data);
+    };
     return (
         <div className="container">
-            <form className="card">
+            <form className="card" onSubmit={handleSubmit}>
                 <div className="font-roboto">
                     <h2>Create Account</h2>
                     <p>Join the next generation of digital workspace.</p>
@@ -14,6 +28,7 @@ export default function RegisterPage() {
                 <div>
                     <label htmlFor="name">FULL NAME</label>
                     <Input
+                        name="name"
                         type="text"
                         placeholder="Enter your full name"
                         icon={<span className="icon">�</span>}
@@ -22,6 +37,7 @@ export default function RegisterPage() {
                 <div>
                     <label htmlFor="email">EMAIL ADDRESS</label>
                     <Input
+                        name="email"
                         type="email"
                         placeholder="Enter your email"
                         icon={<span className="icon">📧</span>}
@@ -32,6 +48,7 @@ export default function RegisterPage() {
                         <label htmlFor="password">PASSWORD</label>
                     </div>
                     <Input
+                        name="password"
                         type="password"
                         placeholder="Enter your password"
                         icon={<span className="icon">🔒</span>}
@@ -40,7 +57,7 @@ export default function RegisterPage() {
                 <button className="btn">Sign Up</button>
             </form>
             <div>
-                <p className="auth font-plus-jakarta-sans">
+                <p className="auth ">
                     {`Already have an account?`}{" "}
                     <Link href="/login">Sign in</Link>
                 </p>

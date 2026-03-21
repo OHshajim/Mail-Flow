@@ -1,12 +1,24 @@
+"use client";
 import Link from "next/link";
 
 import Input from "@/components/input/input";
-import "@/app/(authentication)/login/login.css"
+import "@/app/(authentication)/auth.css"
 
 export default function LoginPage() {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            email: formData.get("email"),
+            password: formData.get("password"),
+        };
+
+        console.log(data);
+    };
     return (
         <div className="container">
-            <form className="card">
+            <form className="card" onSubmit={handleSubmit}>
                 <div className="font-roboto">
                     <h2>Welcome Back</h2>
                     <p>Step into ethereal workspace</p>
@@ -14,6 +26,7 @@ export default function LoginPage() {
                 <div>
                     <label htmlFor="email">EMAIL ADDRESS</label>
                     <Input
+                        name="email"
                         type="email"
                         placeholder="Enter your email"
                         icon={<span className="icon">📧</span>}
@@ -23,13 +36,14 @@ export default function LoginPage() {
                     <div>
                         <label htmlFor="password">PASSWORD</label>
                         <Link
-                            href="/forgot-password"
-                            className="forgot-link font-plus-jakarta-sans"
+                            href="/forgotPassword"
+                            className="forgot-link"
                         >
                             FORGOT?
                         </Link>
                     </div>
                     <Input
+                        name="password"
                         type="password"
                         placeholder="Enter your password"
                         icon={<span className="icon">🔒</span>}
@@ -38,7 +52,7 @@ export default function LoginPage() {
                 <button className="btn">Sign In</button>
             </form>
             <div>
-                <p className="auth font-plus-jakarta-sans">
+                <p className="auth ">
                     {`Don't have an account?`}{" "}
                     <Link href="/register" >Sign up</Link>
                 </p>
