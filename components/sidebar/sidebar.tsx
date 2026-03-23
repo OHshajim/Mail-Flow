@@ -1,89 +1,154 @@
 "use client";
-import { useState } from "react";
-import "@/components/sidebar/sidebar.css";
-import { AllMailIcon, DraftIcon, InboxIcon, InfoIcon, QuestionIcon, SentIcon, SettingIcon, StarIcon, SubscribeIcon, TrashIcon } from "@/public/icons";
+
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const navGroups = [
-            { icon: <InboxIcon className="sb-item-icon" />, label: "Inbox", href: "/", active: true },
-            { icon: <StarIcon className="sb-item-icon" />, label: "Starred", href: "/starred" },
-            { icon: <SentIcon className="sb-item-icon" />, label: "Sent", href: "/send"},
-            { icon: <DraftIcon className="sb-item-icon" />, label: "Drafts", href: "/draftMail"},
-            { icon: <SubscribeIcon className="sb-item-icon"/>, label: "Subscriptions", href: "/subscribe"},
-            { icon: <TrashIcon className="sb-item-icon" size={20}/>, label: "Bin", href: "/bin"},
-            { icon: <InfoIcon className="sb-item-icon"/>, label: "Spam", href: "/spam"},
-            { icon: <AllMailIcon className="sb-item-icon"/>, label: "All Mail", href: "/allMail"},
-            { icon: <QuestionIcon className="sb-item-icon"/>, label: "Help & Suggestions", href: "/help" },
-];
+import "@/components/sidebar/sidebar.css";
+import { SettingIcon } from "@/public/icons";
+import { navGroups } from "@/public/data";
 
-export default function Sidebar() {
+export default function Sidebar({
+    isMobileMenuOpen,
+    closeMobileMenu,
+    onComposeClick,
+}: {
+    isMobileMenuOpen: boolean;
+    closeMobileMenu: () => void;
+    onComposeClick: () => void;
+}) {
     const [active, setActive] = useState("Inbox");
     const [collapsed, setCollapsed] = useState(false);
+    const [isMediumScreen, setIsMediumScreen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [hoverExpand, setHoverExpand] = useState(false);
+
+    const overlayRef = useRef<HTMLDivElement>(null);
+
+    // Responsive logic
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            setIsMobile(width <= 768);
+            setIsMediumScreen(width <= 1080 && width > 768);
+
+            if (width <= 1080 && width > 768) {
+                setCollapsed(true);
+            } else if (width > 1080) {
+                setCollapsed(false);
+            }
+
+            if (width > 768) closeMobileMenu();
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Close on outside click (mobile)
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (
+                isMobileMenuOpen &&
+                overlayRef.current &&
+                !overlayRef.current.contains(e.target as Node)
+            ) {
+                closeMobileMenu();
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+            document.removeEventListener("mousedown", handleClickOutside);
+    }, [isMobileMenuOpen]);
+
+    // Lock scroll
+    useEffect(() => {
+        document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+    }, [isMobileMenuOpen]);
+
+    const shouldHoverExpand = collapsed && isMediumScreen && !isMobile;
+
+    const content = (
+        <aside
+            className={`sb ${collapsed ? "collapsed" : ""} ${
+                hoverExpand && shouldHoverExpand ? "hover-expand" : ""
+            }`}
+            onMouseEnter={() => shouldHoverExpand && setHoverExpand(true)}
+            onMouseLeave={() => shouldHoverExpand && setHoverExpand(false)}
+        >
+            {/* Header */}
+            <div className="sb-header">
+            <button className="btn" onClick={onComposeClick}>
+                {!collapsed || hoverExpand ? "Compose" : "+"}
+            </button>
+            </div>
+
+            {/* Nav */}
+            <nav className="sb-nav">
+                {navGroups.map((group) => (
+                    <Link
+                        href={group.href}
+                        key={group.label}
+                        style={{ textDecoration: "none" }}
+                    >
+                        <div
+                            className={`sb-item ${
+                                active === group.label ? "active" : ""
+                            }`}
+                            onClick={() => {
+                                setActive(group.label);
+                                if (isMobile) closeMobileMenu();
+                            }}
+                        >
+                            {group.icon}
+                            {(!collapsed || hoverExpand) && (
+                                <span className="sb-item-label">
+                                    {group.label}
+                                </span>
+                            )}
+                        </div>
+                    </Link>
+                ))}
+            </nav>
+
+            {/* Footer */}
+            <div className="sb-footer">
+                <div className="sb-user">
+                    <div className="sb-avatar">A</div>
+                    {!collapsed && (
+                        <div className="sb-user-info">
+                            <div className="sb-user-name">Alex Johnson</div>
+                            <div className="sb-user-role">alex@gmail.com</div>
+                        </div>
+                    )}
+                </div>
+
+                <Link href="/settings" className="sb-setting-link">
+                    <SettingIcon />
+                </Link>
+            </div>
+        </aside>
+    );
 
     return (
         <>
-            <div className="sb-layout">
-                {/* Sidebar */}
-                <aside className={`sb${collapsed ? " collapsed" : ""}`}>
-                    {/* Header */}
-                    <div className="sb-header">
-                        <button
-                            className="btn"
-                            style={
-                                collapsed
-                                    ? {
-                                          padding: "12px",
-                                          width: "50px",
-                                          height: "50px",
-                                      }:
-                                      {}
-                            }
-                            onClick={() => setCollapsed((v) => !v)}
-                        >
-                            {collapsed ? "+" : "Compose"}
-                        </button>
-                    </div>
+            {/* Desktop */}
+            {!isMobile && content}
 
-                    {/* Nav */}
-                    <nav className="sb-nav">
-                        {navGroups.map((group) => (
-                            <div key={group.label} className="sb-group">
-                                <Link
-                                    key={group.label}
-                                    href={group.href}
-                                    data-tooltip={group.label}
-                                    className={`sb-item${active === group.label ? " active" : ""}`}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setActive(group.label);
-                                    }}
-                                >
-                                    {group.icon}
-                                    {collapsed || (
-                                        <span className="sb-item-label">
-                                            {group.label}
-                                        </span>
-                                    )}
-                                </Link>
-                            </div>
-                        ))}
-                    </nav>
-
-                    {/* Footer user */}
-                    <div className="sb-footer">
-                        <div className="sb-user">
-                            <div className="sb-avatar">A</div>
-                            <div className="sb-user-info">
-                                <div className="sb-user-name">Alex Johnson</div>
-                                <div className="sb-user-role">
-                                    alex@gmail.com
-                                </div>
-                            </div>
-                        </div>
-                        <SettingIcon/>
+            {/* Mobile */}
+            {isMobile && isMobileMenuOpen && (
+                <div className="mobile-overlay">
+                    <div
+                        className="mobile-overlay-backdrop"
+                        onClick={closeMobileMenu}
+                    />
+                    <div ref={overlayRef} className="mobile-sidebar-container">
+                        {content}
                     </div>
-                </aside>
-            </div>
+                </div>
+            )}
         </>
     );
 }

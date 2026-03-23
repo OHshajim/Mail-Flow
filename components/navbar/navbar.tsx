@@ -4,17 +4,21 @@ import { useState, useRef, useEffect } from "react";
 import "@/components/navbar/navbar.css";
 import Image from "next/image";
 import Link from "next/link";
-import { BlockIcon, DraftIcon, ThreeDotsIcon } from "@/public/icons";
+import { BlockIcon, DraftIcon, ThreeDotsIcon, MenuIcon } from "@/public/icons";
 
-export default function Navbar() {
+interface NavbarProps {
+    onMenuClick?: () => void; // Optional: opens mobile sidebar
+}
+
+export default function Navbar({ onMenuClick }: NavbarProps) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        function handleClickOutside(e) {
+        function handleClickOutside(e: MouseEvent) {
             if (
                 dropdownRef.current &&
-                !dropdownRef.current.contains(e.target)
+                !dropdownRef.current.contains(e.target as Node)
             ) {
                 setDropdownOpen(false);
             }
@@ -26,13 +30,22 @@ export default function Navbar() {
 
     const menuItems = [
         { icon: "👤", label: "Filter", href: "#" },
-        { icon: <DraftIcon/>, label: "Read", href: "#" },
-        { icon: <BlockIcon/>, label: "Block", href: "#" },
+        { icon: <DraftIcon />, label: "Read", href: "#" },
+        { icon: <BlockIcon />, label: "Block", href: "#" },
     ];
 
     return (
         <nav className="nb">
             <div className="nb-inner">
+                {/* Mobile menu button - visible only on mobile */}
+                <button
+                    className="nb-menu-btn"
+                    onClick={onMenuClick}
+                    aria-label="Open menu"
+                >
+                    <MenuIcon size={20} />
+                </button>
+
                 {/* Logo + Name */}
                 <Link href="/" className="nb-logo" aria-label="Home">
                     <Image
@@ -45,6 +58,7 @@ export default function Navbar() {
                     />
                     <span className="nb-logo-name">MailFlow</span>
                 </Link>
+
                 <div className="nb-right">
                     {/* Search */}
                     <div className="nb-search">
@@ -67,6 +81,7 @@ export default function Navbar() {
                             aria-label="Search"
                         />
                     </div>
+
                     {/* 3-dot dropdown */}
                     <div className="nb-dd-wrap" ref={dropdownRef}>
                         <button
@@ -88,7 +103,7 @@ export default function Navbar() {
                                 <li key={item.label} role="menuitem">
                                     <Link
                                         href={item.href}
-                                        className={`nb-dd-item`}
+                                        className="nb-dd-item"
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         <span>{item.icon}</span>

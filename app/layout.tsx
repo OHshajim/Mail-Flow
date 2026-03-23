@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/navbar/navbar";
-import Sidebar from "@/components/sidebar/sidebar";
 
 export const metadata: Metadata = {
   title: "Mail Flow",
@@ -19,8 +17,6 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body>
-        <Navbar/>
-        <Sidebar/>
         {children}
       </body>
     </html>
