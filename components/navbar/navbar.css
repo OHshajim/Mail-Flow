@@ -161,24 +161,12 @@
     }
 
     .nb-dot {
-        width: 3.5px;
-        height: 3.5px;
-        border-radius: 50%;
-        background: var(--muted);
         transition: background 0.2s, transform 0.2s;
     }
 
     .nb-dots-btn:hover .nb-dot,
     .nb-dots-btn[aria-expanded="true"] .nb-dot {
-        background: var(--accent);
-    }
-
-    .nb-dots-btn[aria-expanded="true"] .nb-dot:nth-child(1) {
-        transform: translateY(-1px);
-    }
-
-    .nb-dots-btn[aria-expanded="true"] .nb-dot:nth-child(3) {
-        transform: translateY(1px);
+        color: var(--accent);
     }
 
     /* DROPDOWN */
@@ -232,14 +220,6 @@
         background: rgba(255, 255, 255, 0.05);
         color: var(--text);
         transform: translateX(2px);
-    }
-
-    .nb-dd-item.danger {
-        color: var(--danger);
-    }
-
-    .nb-dd-item.danger:hover {
-        background: rgba(248, 113, 113, 0.09);
     }
 
     /* RESPONSIVE */

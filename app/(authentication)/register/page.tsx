@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import Input from "@/components/input/input";
 import "@/app/(authentication)/auth.css";
+import { LockIcon, MailIcon, UserIcon } from "@/public/icons";
 
 export default function RegisterPage() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,7 +32,7 @@ export default function RegisterPage() {
                         name="name"
                         type="text"
                         placeholder="Enter your full name"
-                        icon={<span className="icon">�</span>}
+                        icon={<UserIcon className="icon"/>}
                     />
                 </div>
                 <div>
@@ -40,7 +41,7 @@ export default function RegisterPage() {
                         name="email"
                         type="email"
                         placeholder="Enter your email"
-                        icon={<span className="icon">📧</span>}
+                        icon={<MailIcon className="icon"/>}
                     />
                 </div>
                 <div>
@@ -51,7 +52,7 @@ export default function RegisterPage() {
                         name="password"
                         type="password"
                         placeholder="Enter your password"
-                        icon={<span className="icon">🔒</span>}
+                        icon={<LockIcon className="icon"/>}
                     />
                 </div>
                 <button className="btn">Sign Up</button>

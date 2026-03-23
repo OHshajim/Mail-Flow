@@ -1,45 +1,46 @@
 "use client";
 import { useState } from "react";
 import "@/components/sidebar/sidebar.css";
+import { AllMailIcon, DraftIcon, InboxIcon, InfoIcon, QuestionIcon, SentIcon, SettingIcon, StarIcon, SubscribeIcon, TrashIcon } from "@/public/icons";
+import Link from "next/link";
+
 const navGroups = [
-            { icon: "🏠", label: "Inbox", href: "#", active: true },
-            { icon: "📊", label: "Starred", href: "#" },
-            { icon: "📁", label: "Sent", href: "#"},
-            { icon: "💬", label: "Drafts", href: "#"},
-            { icon: "💬", label: "Subscriptions", href: "#"},
-            { icon: "💬", label: "Bin", href: "#"},
-            { icon: "💬", label: "Span", href: "#"},
-            { icon: "💬", label: "All Mail", href: "#"},
-            { icon: "❓", label: "Help & Suggestions", href: "#" },
+            { icon: <InboxIcon className="sb-item-icon" />, label: "Inbox", href: "/", active: true },
+            { icon: <StarIcon className="sb-item-icon" />, label: "Starred", href: "/starred" },
+            { icon: <SentIcon className="sb-item-icon" />, label: "Sent", href: "/send"},
+            { icon: <DraftIcon className="sb-item-icon" />, label: "Drafts", href: "/draftMail"},
+            { icon: <SubscribeIcon className="sb-item-icon"/>, label: "Subscriptions", href: "/subscribe"},
+            { icon: <TrashIcon className="sb-item-icon" size={20}/>, label: "Bin", href: "/bin"},
+            { icon: <InfoIcon className="sb-item-icon"/>, label: "Spam", href: "/spam"},
+            { icon: <AllMailIcon className="sb-item-icon"/>, label: "All Mail", href: "/allMail"},
+            { icon: <QuestionIcon className="sb-item-icon"/>, label: "Help & Suggestions", href: "/help" },
 ];
 
 export default function Sidebar() {
     const [active, setActive] = useState("Inbox");
     const [collapsed, setCollapsed] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
         <>
             <div className="sb-layout">
-                {/* Mobile overlay */}
-                {mobileOpen && (
-                    <div
-                        className="sb-overlay"
-                        onClick={() => setMobileOpen(false)}
-                    />
-                )}
-
                 {/* Sidebar */}
-                <aside
-                    className={`sb${collapsed ? " collapsed" : ""}${mobileOpen ? " mobile-open" : ""}`}
-                >
+                <aside className={`sb${collapsed ? " collapsed" : ""}`}>
                     {/* Header */}
                     <div className="sb-header">
                         <button
                             className="btn"
+                            style={
+                                collapsed
+                                    ? {
+                                          padding: "12px",
+                                          width: "50px",
+                                          height: "50px",
+                                      }:
+                                      {}
+                            }
                             onClick={() => setCollapsed((v) => !v)}
                         >
-                            Compose
+                            {collapsed ? "+" : "Compose"}
                         </button>
                     </div>
 
@@ -47,7 +48,7 @@ export default function Sidebar() {
                     <nav className="sb-nav">
                         {navGroups.map((group) => (
                             <div key={group.label} className="sb-group">
-                                <a
+                                <Link
                                     key={group.label}
                                     href={group.href}
                                     data-tooltip={group.label}
@@ -55,16 +56,15 @@ export default function Sidebar() {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setActive(group.label);
-                                        setMobileOpen(false);
                                     }}
                                 >
-                                    <span className="sb-item-icon">
-                                        {group.icon}
-                                    </span>
-                                    <span className="sb-item-label">
-                                        {group.label}
-                                    </span>
-                                </a>
+                                    {group.icon}
+                                    {collapsed || (
+                                        <span className="sb-item-label">
+                                            {group.label}
+                                        </span>
+                                    )}
+                                </Link>
                             </div>
                         ))}
                     </nav>
@@ -75,20 +75,14 @@ export default function Sidebar() {
                             <div className="sb-avatar">A</div>
                             <div className="sb-user-info">
                                 <div className="sb-user-name">Alex Johnson</div>
-                                <div className="sb-user-role">alex@gmail.com</div>
+                                <div className="sb-user-role">
+                                    alex@gmail.com
+                                </div>
                             </div>
                         </div>
+                        <SettingIcon/>
                     </div>
                 </aside>
-
-                {/* Mobile trigger */}
-                <button
-                    className="sb-mobile-trigger"
-                    onClick={() => setMobileOpen((v) => !v)}
-                    aria-label="Toggle sidebar"
-                >
-                    ☰
-                </button>
             </div>
         </>
     );

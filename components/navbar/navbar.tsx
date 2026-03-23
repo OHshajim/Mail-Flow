@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import "@/components/navbar/navbar.css";
 import Image from "next/image";
 import Link from "next/link";
+import { BlockIcon, DraftIcon, ThreeDotsIcon } from "@/public/icons";
 
 export default function Navbar() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -25,11 +26,8 @@ export default function Navbar() {
 
     const menuItems = [
         { icon: "👤", label: "Filter", href: "#" },
-        { icon: "⚙️", label: "Read", href: "#" },
-        { icon: "🌙", label: "Bin", href: "#" },
-        { icon: "🌙", label: "Block", href: "#" },
-        { icon: "🌙", label: "Star", href: "#" },
-        
+        { icon: <DraftIcon/>, label: "Read", href: "#" },
+        { icon: <BlockIcon/>, label: "Block", href: "#" },
     ];
 
     return (
@@ -79,9 +77,7 @@ export default function Navbar() {
                             onClick={() => setDropdownOpen((v) => !v)}
                         >
                             <div className="nb-dots-inner">
-                                <div className="nb-dot" />
-                                <div className="nb-dot" />
-                                <div className="nb-dot" />
+                                <ThreeDotsIcon className="nb-dot" />
                             </div>
                         </button>
                         <ul
@@ -90,14 +86,14 @@ export default function Navbar() {
                         >
                             {menuItems.map((item) => (
                                 <li key={item.label} role="menuitem">
-                                    <a
+                                    <Link
                                         href={item.href}
                                         className={`nb-dd-item`}
                                         onClick={() => setDropdownOpen(false)}
                                     >
                                         <span>{item.icon}</span>
                                         {item.label}
-                                    </a>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

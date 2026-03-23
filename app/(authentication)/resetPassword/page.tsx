@@ -5,6 +5,7 @@ import Input from "@/components/input/input";
 import "@/app/(authentication)/auth.css";
 import { Popup } from "@/components/popup/popup";
 import { useRouter } from "next/navigation";
+import { LockIcon } from "@/public/icons";
 
 export default function ResetPasswordPage() {
     const router = useRouter();
@@ -41,14 +42,14 @@ export default function ResetPasswordPage() {
                     name="password"
                     type="password"
                     placeholder="New password"
-                    icon={<span className="icon">🔒</span>}
+                    icon={<LockIcon className="icon"/>}
                 />
 
                 <Input
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm password"
-                    icon={<span className="icon">🔒</span>}
+                    icon={<LockIcon className="icon"/>}
                 />
 
                 <button className="btn">Reset Password</button>

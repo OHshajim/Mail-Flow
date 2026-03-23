@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import Input from "@/components/input/input";
 import "@/app/(authentication)/auth.css"
+import { LockIcon, MailIcon } from "@/public/icons";
+
 
 export default function LoginPage() {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +31,7 @@ export default function LoginPage() {
                         name="email"
                         type="email"
                         placeholder="Enter your email"
-                        icon={<span className="icon">📧</span>}
+                        icon={<MailIcon className="icon"/>}
                     />
                 </div>
                 <div>
@@ -46,7 +48,7 @@ export default function LoginPage() {
                         name="password"
                         type="password"
                         placeholder="Enter your password"
-                        icon={<span className="icon">🔒</span>}
+                        icon={<LockIcon className="icon"/>}
                     />
                 </div>
                 <button className="btn">Sign In</button>

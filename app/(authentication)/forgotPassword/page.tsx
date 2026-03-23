@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import Input from "@/components/input/input";
 import "@/app/(authentication)/auth.css";
+import { MailIcon } from "@/public/icons";
 
 export default function ForgotPasswordPage() {
     return (
@@ -17,7 +18,7 @@ export default function ForgotPasswordPage() {
                         name="email"
                         type="email"
                         placeholder="Enter your email"
-                        icon={<span className="icon">📧</span>}
+                        icon={<MailIcon className="icon"/>}
                     />
                 </div>
                 <button className="btn">Send Reset Link</button>

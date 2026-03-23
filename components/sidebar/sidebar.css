@@ -17,12 +17,16 @@
     --muted: #71717a;
     --danger: #f87171;
     --sidebar-w: 288px;
-    --sidebar-collapsed: 64px;
+    --sidebar-collapsed: 80px;
     --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .sb-layout {
     display: flex;
     background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 50%, #fdf4ff 100%);
+}
+.sb-header{
+    display: flex;
+    justify-content: center;
 }
 /* ── SIDEBAR ── */
 .sb {
@@ -46,6 +50,7 @@
 }
 .sb.collapsed {
     width: var(--sidebar-collapsed);
+    padding: 12px 8px;
 }
 
 
@@ -193,16 +198,7 @@
     color: var(--muted);
     white-space: nowrap;
 }
-/* MOBILE OVERLAY */
-.sb-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(2px);
-    z-index: 99;
-    animation: fadeIn 0.2s ease;
-}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -211,29 +207,8 @@
         opacity: 1;
     }
 }
-.sb-mobile-trigger {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 101;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #a78bfa, #60a5fa);
-    border: none;
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px var(--accent-glow);
-    display: none;
-    place-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-.sb-mobile-trigger:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 28px var(--accent-glow);
-}
+
+
 /* CONTENT AREA */
 .sb-content {
     flex: 1;
@@ -284,34 +259,8 @@
     font-weight: 700;
     color: var(--text);
 }
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .sb {
-        position: fixed;
-        left: 0;
-        top: 0;
-        transform: translateX(-100%);
-        transition: transform var(--transition), width var(--transition);
-        z-index: 100;
-    }
-    .sb.mobile-open {
-        transform: translateX(0);
-        width: var(--sidebar-w) !important;
-    }
-    .sb.mobile-open .sb-logo-name,
-    .sb.mobile-open .sb-item-label,
-    .sb.mobile-open .sb-badge,
-    .sb.mobile-open .sb-group-label,
-    .sb.mobile-open .sb-user-info {
-        opacity: 1;
-        height: auto;
-    }
-    .sb-overlay {
-        display: block;
-    }
-    .sb-mobile-trigger {
-        display: grid;
-    }
-    .sb-collapse-btn {
-        display: none;
+       display: none;
     }
 }
