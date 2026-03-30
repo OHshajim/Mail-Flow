@@ -2,6 +2,7 @@
   background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 50%, #fdf4ff 100%);
   --foreground: #000000;
   --color-secondary: #5B5B5F;
+  height: 100%;
 }
 
 /* Font family */
@@ -26,14 +27,6 @@
   font-family: 'Roboto', sans-serif;
 }
 
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a; */
-    /* --foreground: #ffffff; */
-  /* }
-}  */
-
 html {
   height: 100%;
 }
@@ -42,36 +35,32 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+
 }
 
 body {
+  padding: 20px;
+  box-sizing: border-box;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: 'Inter', sans-serif;
   color: var(--foreground);
-  background: var(--background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 .container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: auto;
 }
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
 
 /* Button */
 .btn {
   margin-top: 10px;
-  padding: 12px;
+  padding: 16px 24px;
   border-radius: 9999px;
   border: none;
   cursor: pointer;
@@ -83,15 +72,14 @@ body {
 
   backdrop-filter: blur(24px);
   box-shadow: 0px 32px 64px -12px rgba(106, 56, 211, 0.12);
-  background: linear-gradient(135deg, #6A38D3 0%, #5D27C7 100%);
-
+  background: linear-gradient(-135deg, #9d83d7 0%, #7f58d3 50%, #6A38D3 100%);
   transition: all 0.3s ease;
 }
 
 /* Button Hover */
 .btn:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0px 40px 80px -10px rgba(106, 56, 211, 0.3);
+  box-shadow: 0px 10px 15px -3px #6A38D333;
 }
 
 /* Button Click */

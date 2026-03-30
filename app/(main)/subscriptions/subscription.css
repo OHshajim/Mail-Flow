@@ -1,0 +1,21 @@
+.pricing-page {
+    color: #1f2937;
+    line-height: 1.5;
+}
+/* Header */
+.header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+    .title {
+        font-size: 3rem;
+    }
+}

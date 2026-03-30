@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/navbar/navbar";
 import Sidebar from "@/components/sidebar/sidebar";
 import "@/app/(main)/main.css";
+import ComposeEmail from "@/components/composePanel/compose";
 
 export default function MainLayout({
     children,
@@ -27,12 +28,9 @@ export default function MainLayout({
                 />
 
                 <main className="main-content">{children}</main>
+                {/* Compose Panel */}
+                {composeOpen && <ComposeEmail onClose={() => setComposeOpen(false)} />}
             </div>
-
-            {/* Compose Panel */}
-            {/* {composeOpen && (
-               
-            )} */}
         </div>
     );
 }

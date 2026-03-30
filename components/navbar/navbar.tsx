@@ -47,7 +47,7 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
                 </button>
 
                 {/* Logo + Name */}
-                <Link href="/" className="nb-logo" aria-label="Home">
+                <Link href="/inbox" className="nb-logo" aria-label="Home">
                     <Image
                         className="nb-logo-icon"
                         src="/logo.svg"

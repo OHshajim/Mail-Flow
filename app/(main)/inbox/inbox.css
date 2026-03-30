@@ -1,20 +1,20 @@
 .inbox-container {
     display: flex;
+    height: 100%;
+    overflow-y: auto;
     gap: 24px;
-    padding: 24px 24px 0px 24px;
-    height: calc(100vh - 80px);
-    /* adjust based on navbar height */
-    overflow: hidden;
 }
 
 /* Left column (list area) */
 .inbox-list {
     flex: 1;
+    padding: 24px;
+    width: 100%;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px);
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
@@ -26,10 +26,20 @@
 }
 
 /* Tabs */
+.filter-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block: 10px; 
+}
 .inbox-tabs {
     display: flex;
     gap: 4px;
-    padding: 16px 20px 0;
+    background: #0F172A0F;
+    border-radius: 14px;
+    padding: 6px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -46,23 +56,25 @@
 }
 
 .inbox-tabs button.active {
-    background: rgba(167, 139, 250, 0.15);
+    background: #ffffff;
     color: var(--accent);
+    border-radius: 10px;
 }
 
 /* Filters */
 .inbox-filters {
     display: flex;
     gap: 8px;
-    padding: 12px 20px;
+    background: #0F172A0F;
+    border-radius: 14px;
+    padding: 6px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .inbox-filters button {
-    background: rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 4px 12px;
-    border-radius: 20px;
+    border-radius: 99999px;
     font-size: 12px;
     cursor: pointer;
     color: var(--muted);
@@ -73,54 +85,6 @@
     background: var(--accent);
     border-color: var(--accent);
     color: white;
-}
-
-/* Email list */
-.email-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px;
-}
-
-.email-item {
-    padding: 12px 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-bottom: 4px;
-    background: rgba(255, 255, 255, 0.4);
-}
-
-.email-item:hover {
-    background: rgba(255, 255, 255, 0.7);
-}
-
-.email-item.unread {
-    background: rgba(167, 139, 250, 0.1);
-    font-weight: 500;
-}
-
-.email-item.selected {
-    background: rgba(167, 139, 250, 0.2);
-    border-left: 3px solid var(--accent);
-}
-
-.email-sender {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-}
-
-.email-subject {
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.email-date {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 6px;
 }
 
 /* Detail view */
@@ -190,7 +154,7 @@
 @media (max-width: 768px) {
     .inbox-container {
         flex-direction: column;
-        padding: 16px;
+        padding: 12px 0px;
         height: auto;
     }
 
@@ -198,6 +162,7 @@
         flex: none;
         width: 100%;
         margin-bottom: 16px;
+        padding: 16px;
     }
 
     .inbox-list.with-detail {

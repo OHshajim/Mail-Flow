@@ -1,0 +1,184 @@
+/* ===== GRID ===== */
+.cards-grid {
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ===== CARD BASE ===== */
+.card {
+    position: relative;
+    background: white;
+    border-radius: 18px;
+    padding: 1.8rem;
+    border: 1px solid #f1f1f1;
+    overflow: hidden;
+    transition: all .35s ease;
+}
+
+/* gradient border glow */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, #7c3aed, transparent, #7c3aed);
+    opacity: 0;
+    transition: .35s;
+    z-index: 0;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: white;
+    border-radius: 18px;
+    z-index: 1;
+}
+
+.card>* {
+    position: relative;
+    z-index: 2;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 5px 5px 10px var(--icon-grad-2);
+}
+
+.card:hover::before {
+    opacity: .18;
+}
+
+/* ===== HEADER ===== */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 1rem;
+}
+
+.card-header h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ===== ICON BADGE ===== */
+.card-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--icon-grad-1), var(--icon-grad-2));
+    color: white;
+    transition: .35s;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.15);
+    filter: brightness(1.05);
+}
+
+/* ===== LIST ===== */
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 18px;
+}
+
+.card-list li {
+    font-size: .88rem;
+    color: #4b5563;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    transition: .25s;
+}
+
+.card-list li::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: var(--icon-grad-1);
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: .25s;
+}
+
+.card-list li:hover {
+    color: #111827;
+    transform: translateX(4px);
+}
+
+.card-list li:hover::before {
+    transform: scale(1.6);
+}
+
+/* ===== CTA LINK ===== */
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .9rem;
+    font-weight: 600;
+    color: #6d28d9;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.card-link::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #6d28d9;
+    transition: .3s;
+}
+
+.card-link:hover::after {
+    width: 100%;
+}
+
+.arrow {
+    transition: .3s;
+}
+
+.card-link:hover .arrow {
+    transform: translateX(6px);
+}
+
+/* ===== ENTRY ANIMATION ===== */
+.fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp .7s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

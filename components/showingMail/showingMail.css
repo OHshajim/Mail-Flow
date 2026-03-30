@@ -1,0 +1,248 @@
+/* ── Container ── */
+.email-detail {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #ebebeb;
+}
+
+/* ── Header ── */
+.detail-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.detail-subject {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.detail-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+/* ── Icon buttons ── */
+.detail-btn {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #888;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.detail-btn:hover {
+    background: #f4f4f5;
+    color: #333;
+}
+
+.detail-btn--active {
+    background: #f4f4f5;
+    color: #333;
+}
+
+/* Star active state */
+.detail-btn--starred {
+    color: #f59e0b;
+}
+
+.detail-btn--starred:hover {
+    color: #d97706;
+    background: #fef3c7;
+}
+
+/* ── Dropdown menu ── */
+.detail-menu-wrapper {
+    position: relative;
+}
+
+.detail-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    min-width: 180px;
+    z-index: 100;
+    animation: menuFadeIn 0.15s ease;
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.detail-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s ease;
+}
+
+.detail-menu-item:hover {
+    background: #f4f4f5;
+}
+
+.detail-menu-item--danger {
+    color: #ef4444;
+}
+
+.detail-menu-item--danger:hover {
+    background: #fef2f2;
+}
+
+.detail-menu-icon {
+    font-size: 14px;
+    width: 18px;
+    text-align: center;
+}
+
+/* ── Sender row ── */
+.detail-sender-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.detail-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.detail-sender-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.detail-sender-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.detail-sender-name-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.detail-sender-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+}
+
+.detail-sender-email {
+    font-size: 0.8125rem;
+    color: #9ca3af;
+}
+
+.detail-sender-to {
+    font-size: 0.8125rem;
+    color: #9ca3af;
+    margin: 3px 0 0;
+}
+
+.detail-date {
+    font-size: 0.8125rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* ── Body ── */
+.detail-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    font-size: 0.9375rem;
+    color: #374151;
+    line-height: 1.75;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.detail-body p {
+    margin: 0;
+}
+
+/* ── Reply bar ── */
+.detail-reply-bar {
+    display: flex;
+    gap: 8px;
+    padding: 14px 20px;
+    border-top: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.detail-reply-btn {
+    padding: 8px 18px;
+    border-radius: 9999px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.detail-reply-btn:hover {
+    background: #f4f4f5;
+    border-color: #d1d5db;
+}

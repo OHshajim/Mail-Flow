@@ -1,13 +1,10 @@
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
 :root {
-    --bg: #111318;
     --border: rgba(255, 255, 255, 0.08);
     --surface: rgba(255, 255, 255, 0.4);
     --surface-solid: #f1f5f980;
@@ -23,26 +20,17 @@
 }
 
 /* ─────────────────────────────
-   Global Layout
-───────────────────────────── */
-.sb-layout {
-    display: flex;
-    background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 50%, #fdf4ff 100%);
-}
-
-/* ─────────────────────────────
    Sidebar Base
 ───────────────────────────── */
 .sb {
     width: var(--sidebar-w);
-    height: 90vh;
+    height: 100%;
     position: sticky;
     top: 0;
     display: flex;
     flex-direction: column;
-    margin: 20px 0px 20px 20px;
-    padding: 24px;
-    background: #ffffff73;
+    padding: 24px 24px 10px 24px;
+    background: #ffffffa3;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-right: 1px solid var(--border);
@@ -55,7 +43,7 @@
 
 .sb.collapsed {
     width: var(--sidebar-collapsed);
-    padding: 12px 8px;
+    padding: 12px 14px;
 }
 
 /* ─────────────────────────────
@@ -275,17 +263,10 @@
 /* Collapsed footer adjustments */
 .sb.collapsed .sb-footer {
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
     align-items: center;
-    justify-content: center;
 }
 
-.sb.collapsed .sb-user {
-    flex-direction: column;
-    padding: 4px;
-    gap: 6px;
-    flex: 0;
-}
 
 .sb.collapsed .sb-user-info {
     display: none;

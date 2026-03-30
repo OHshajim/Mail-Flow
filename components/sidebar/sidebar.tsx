@@ -6,6 +6,7 @@ import Link from "next/link";
 import "@/components/sidebar/sidebar.css";
 import { SettingIcon } from "@/public/icons";
 import { navGroups } from "@/public/data";
+import Image from "next/image";
 
 export default function Sidebar({
     isMobileMenuOpen,
@@ -80,9 +81,22 @@ export default function Sidebar({
         >
             {/* Header */}
             <div className="sb-header">
-            <button className="btn" onClick={onComposeClick}>
-                {!collapsed || hoverExpand ? "Compose" : "+"}
-            </button>
+                <button
+                    className="btn"
+                    onClick={onComposeClick}
+                    style={
+                        collapsed && !hoverExpand
+                            ? {
+                                  width: "50px",
+                                  height: "50px",
+                                  padding: "0",
+                                  justifyContent: "center",
+                              }
+                            : {}
+                    }
+                >
+                    {!collapsed || hoverExpand ? "Compose" : "+"}
+                </button>
             </div>
 
             {/* Nav */}
@@ -116,8 +130,15 @@ export default function Sidebar({
             {/* Footer */}
             <div className="sb-footer">
                 <div className="sb-user">
-                    <div className="sb-avatar">A</div>
-                    {!collapsed && (
+                    <Image
+                        src={"/logo.svg"}
+                        alt="User-Image"
+                        className="sb-avatar"
+                        width={50}
+                        height={50}
+                        loading="lazy"
+                    />
+                    {(!collapsed || hoverExpand) && (
                         <div className="sb-user-info">
                             <div className="sb-user-name">Alex Johnson</div>
                             <div className="sb-user-role">alex@gmail.com</div>
