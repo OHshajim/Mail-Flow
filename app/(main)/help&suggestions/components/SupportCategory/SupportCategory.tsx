@@ -32,7 +32,7 @@ const SupportCategory = () => {
                                 animationDelay: `${idx * 120}ms`,
                                 "--icon-grad-1": gradient[0],
                                 "--icon-grad-2": gradient[1],
-                            }}
+                            } as React.CSSProperties}
                         >
                             <div className="card-header">
                                 <div className="card-icon">{cat.icon}</div>

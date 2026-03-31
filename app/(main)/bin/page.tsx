@@ -1,22 +1,21 @@
 "use client";
-
+// import "./Allmails.css";
 import { useState } from "react";
 import { allMails } from "@/public/data";
 import Mails from "@/components/mails/mails";
 import { ShowingMail } from "@/components/showingMail/showingMail";
 
-export default function InboxPage() {
-    const [activeTab, setActiveTab] = useState<"primary" | "social" | "promotions">("primary");
+export default function BinPage() {
     const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
-    const [selectedMail, setSelectedMail] = useState<(typeof allMails)[0] | null>(null);
+    const [selectedMail, setSelectedMail] = useState<
+        (typeof allMails)[0] | null
+    >(null);
 
-    const filteredMails = allMails
-        .filter((mail) => mail.category === activeTab)
-        .filter((mail) => {
-            if (filter === "unread") return !mail.read;
-            if (filter === "read") return mail.read;
-            return true;
-        });
+    const filteredMails = allMails.filter((mail) => {
+        if (filter === "unread") return !mail.read;
+        if (filter === "read") return mail.read;
+        return true;
+    });
 
     const handleMailClick = (mail: (typeof allMails)[0]) => {
         setSelectedMail(mail);
@@ -29,35 +28,11 @@ export default function InboxPage() {
     return (
         <div className={`inbox-container ${selectedMail ? "mail-open" : ""}`}>
             {/* Left column: tabs, filters, list */}
-            <div className="inbox-list">
+             <div className="inbox-list">
                 <h3 className="page-title">
-                    Inbox <span className="page-title-badge">34</span>
+                    All Mails <span className="page-title-badge">34</span>
                 </h3>
                 <div className="filter-container">
-                    {/* Tabs */}
-                    <div className="inbox-tabs">
-                        <button
-                            className={activeTab === "primary" ? "active" : ""}
-                            onClick={() => setActiveTab("primary")}
-                        >
-                            Primary
-                        </button>
-                        <button
-                            className={activeTab === "social" ? "active" : ""}
-                            onClick={() => setActiveTab("social")}
-                        >
-                            Social
-                        </button>
-                        <button
-                            className={
-                                activeTab === "promotions" ? "active" : ""
-                            }
-                            onClick={() => setActiveTab("promotions")}
-                        >
-                            Promotions
-                        </button>
-                    </div>
-
                     {/* Filters */}
                     <div className="inbox-filters">
                         <button

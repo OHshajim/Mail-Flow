@@ -1,8 +1,21 @@
 :root {
-  background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 50%, #fdf4ff 100%);
-  --foreground: #000000;
-  --color-secondary: #5B5B5F;
-  height: 100%;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 50%, #fdf4ff 100%);
+    --foreground: #000000;
+    --color-secondary: #5B5B5F;
+    --bg: #111318;
+    --border: rgba(255, 255, 255, 0.08);
+    --surface: #1a1d27;
+    --accent: #a78bfa;
+    --text: rgba(15, 23, 42, 1);
+    --muted: #71717a;
+    --danger: #f87171;
+    --surface-solid: #f1f5f980;
+    --accent: #4f46e5;
+    --accent-soft: rgba(167, 139, 250, 0.12);
+    --accent-glow: rgba(167, 139, 250, 0.25);
+    --sidebar-w: 288px;
+    --sidebar-collapsed: 80px;
+    --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Font family */
@@ -34,14 +47,14 @@ html {
 html,
 body {
   max-width: 100vw;
+  max-height: 100vh;
   overflow-x: hidden;
-
 }
 
 body {
   padding: 20px;
   box-sizing: border-box;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   font-family: 'Inter', sans-serif;
@@ -87,3 +100,41 @@ body {
   transform: scale(0.98);
 }
 
+
+/* ── Global Custom Scrollbar ── */
+
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #ffffff #DFDFDF;
+}
+
+/* Chrome, Safari, Edge */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 100px;
+  margin: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #DFDFDF;
+  border-radius: 100px;
+  border: 2px solid #ffffff;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #bdbdbd;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: #9e9e9e;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #ffffff;
+}

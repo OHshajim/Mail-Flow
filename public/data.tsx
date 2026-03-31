@@ -31,12 +31,12 @@ export const navGroups = [
     {
         icon: <SentIcon className="sb-item-icon" />,
         label: "Sent",
-        href: "/send",
+        href: "/sent",
     },
     {
         icon: <DraftIcon className="sb-item-icon" />,
         label: "Drafts",
-        href: "/draftMail",
+        href: "/draftMails",
     },
     {
         icon: <SubscribeIcon className="sb-item-icon" />,

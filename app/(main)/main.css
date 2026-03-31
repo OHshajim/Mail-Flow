@@ -1,32 +1,36 @@
+/* =============== LAYOUT SHELL =============== */
+
 .layout {
     display: flex;
     flex-direction: column;
-    height: 91dvh;
+    height: 100dvh;
+    overflow: hidden;
 }
 
 .main-container {
     display: flex;
     gap: 24px;
-    padding: 24px 0px;
+    padding: 24px 0;
     flex: 1;
-    height: 100%;
+    overflow: hidden;
 }
 
 .main-content {
     flex: 1;
     overflow-y: auto;
-    height: 100%;
 }
 
 
-/* Pages */
-.page-title{
-    size: 32px;
+/* =============== PAGE TITLE =============== */
+
+.page-title {
+    font-size: 32px;
     display: flex;
     align-items: center;
     gap: 8px;
     padding: 12px;
 }
+
 .page-title-badge {
     background: #7C3AED1F;
     color: #7C3AED;
@@ -34,15 +38,205 @@
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 99px;
-    transition: opacity var(--transition);
     flex-shrink: 0;
 }
 
+
+/* =============== INBOX LAYOUT =============== */
+
+.inbox-container {
+    display: flex;
+    gap: 24px;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+/* ===== LEFT COLUMN (EMAIL LIST) ===== */
+
+.inbox-list {
+    flex: 1;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: all .3s ease;
+}
+
+
+/* ===== RIGHT COLUMN (DETAIL VIEW) ===== */
+
+.email-detail {
+    flex: 0.6;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 24px;
+    overflow-y: auto;
+    position: relative;
+}
+
+
+/* ===== DESKTOP SPLIT VIEW WHEN MAIL OPEN ===== */
+
+.mail-open .inbox-list {
+    flex: 0.4;
+}
+
+.mail-open .email-detail {
+    flex: 0.6;
+}
+
+
+/* =============== FILTER / TABS =============== */
+
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-block: 10px;
+}
+
+.inbox-tabs {
+    display: flex;
+    gap: 4px;
+    background: #0F172A0F;
+    border-radius: 14px;
+    padding: 6px;
+}
+
+.inbox-tabs button {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .2s;
+}
+
+.inbox-tabs button.active {
+    background: white;
+    color: var(--accent);
+    border-radius: 10px;
+}
+
+
+/* ===== FILTER BUTTONS ===== */
+
+.inbox-filters {
+    display: flex;
+    gap: 8px;
+    background: #0F172A0F;
+    border-radius: 14px;
+    padding: 6px;
+}
+
+.inbox-filters button {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: .2s;
+}
+
+.inbox-filters button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+
+/* =============== EMAIL DETAIL CONTENT =============== */
+
+.detail-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    font-size: 24px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.email-detail h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.detail-from {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detail-body {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =============== EMPTY STATE =============== */
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+}
+
+
+/* ===================================================== */
+/* ================= MOBILE BREAKPOINT ================== */
+/* ===================================================== */
+
 @media (max-width: 768px) {
+
     .main-container {
         display: block;
-        padding: 0px;
-        height: 100%;
+        padding: 0;
     }
 
+    .inbox-container {
+        display: block;
+        padding: 12px 0;
+    }
+
+    .inbox-list {
+        width: 100%;
+        padding: 16px;
+        margin: 0;
+    }
+
+    .email-detail {
+        width: 100%;
+        margin: 0;
+        display: none;
+        /* default mobile = list view */
+    }
+
+    /* 🔥 When email opened → switch screens */
+    .mail-open .inbox-list {
+        display: none;
+    }
+
+    .mail-open .email-detail {
+        display: block;
+    }
 }

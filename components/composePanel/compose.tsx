@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./compose.css";
+import { BlockIcon, CancelIcon, DraftIcon, ExpandIcon, FileIcon, LinkedIcon, ListIcon, NumericListIcon, SentIcon, SkipIcon } from "@/public/icons";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -33,76 +34,6 @@ type ViewMode = "default" | "full";
 // ─── SVG Icons ────────────────────────────────────────────────────────────────
 
 const IC = {
-    Close: () => (
-        <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-            <path
-                d="M1 1l9 9M10 1L1 10"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-            />
-        </svg>
-    ),
-    Draft: () => (
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path
-                d="M2.5 6.5h8"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-            />
-        </svg>
-    ),
-    ExpandFull: () => (
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path
-                d="M1 4.5V1h3.5M8.5 1H12v3.5M12 8.5V12H8.5M4.5 12H1V8.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    ),
-    ZoomOut: () => (
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path
-                d="M4.5 1H1v3.5M12 4.5V1H8.5M8.5 12H12V8.5M1 8.5V12h3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    ),
-    Send: () => (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-                d="M12.5 7L1 2l2.5 5L1 12l11.5-5z"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-            <path
-                d="M3.5 7h5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-            />
-        </svg>
-    ),
-    Attach: () => (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-                d="M12 6.5l-5 5a3.5 3.5 0 01-5-5l5.5-5.5a2 2 0 013 3L5 9.5A1 1 0 013.5 8L8 3.5"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    ),
     Image: () => (
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <rect
@@ -125,33 +56,6 @@ const IC = {
                 d="M1 10l3.5-3 2 2 2-2 3.5 3.5"
                 stroke="currentColor"
                 strokeWidth="1.3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            />
-        </svg>
-    ),
-    Link: () => (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-                d="M5.5 8.5a3 3 0 004.2.2l1.8-1.8a3 3 0 00-4.3-4.2L5.8 4"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-            />
-            <path
-                d="M8.5 5.5a3 3 0 00-4.2-.2L2.5 7.1a3 3 0 004.3 4.2L8.2 10"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-            />
-        </svg>
-    ),
-    Trash: () => (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path
-                d="M2 3.5h10M4.5 3.5V2.5a.5.5 0 01.5-.5h4a.5.5 0 01.5.5v1M5.5 6.5v4M8.5 6.5v4M3 3.5l.7 7.7a1 1 0 001 .8h4.6a1 1 0 001-.8L11 3.5"
-                stroke="currentColor"
-                strokeWidth="1.4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
@@ -220,13 +124,13 @@ const TOOLBAR_GROUPS = [
     [
         {
             cmd: "insertOrderedList",
-            label: "OL",
+            label: <NumericListIcon/>,
             title: "Ordered list",
             style: {},
         },
         {
             cmd: "insertUnorderedList",
-            label: "UL",
+            label: <ListIcon/>,
             title: "Unordered list",
             style: {},
         },
@@ -307,13 +211,6 @@ export default function ComposeEmail({
     }, [to, sending]);
 
     // ── Editor ──────────────────────────────────────────────────────────────
-
-    const exec = useCallback((cmd: string, value?: string) => {
-        editorRef.current?.focus();
-        document.execCommand(cmd, false, value);
-        syncFormats();
-    }, []);
-
     const syncFormats = () => {
         const next = new Set<string>();
         FORMAT_CMDS.forEach((c) => {
@@ -321,6 +218,13 @@ export default function ComposeEmail({
         });
         setFormats(next);
     };
+
+    const exec = useCallback((cmd: string, value?: string) => {
+        editorRef.current?.focus();
+        document.execCommand(cmd, false, value);
+        syncFormats();
+    }, []);
+
 
     const applySize = (size: string) => {
         setFontSize(size);
@@ -410,13 +314,13 @@ export default function ComposeEmail({
                     <span className="cm-bar-title">New Message</span>
 
                     <div className="cm-bar-btns">
-                        {/* Save to draft  ─  minus / dash icon */}
+                        {/* Save to draft  */}
                         <button
                             className="cm-bar-btn"
                             onClick={handleSaveDraft}
                             title="Save draft"
                         >
-                            <IC.Draft />
+                            <SkipIcon size={16}/>
                         </button>
 
                         {/* Expand full ↔ Zoom out */}
@@ -429,7 +333,7 @@ export default function ComposeEmail({
                             }
                             title={isFull ? "Restore size" : "Expand"}
                         >
-                            {isFull ? <IC.ZoomOut /> : <IC.ExpandFull />}
+                            {isFull ? <BlockIcon size={16}/> : <ExpandIcon size={16}/>}
                         </button>
 
                         {/* Close */}
@@ -438,7 +342,7 @@ export default function ComposeEmail({
                             onClick={onClose}
                             title="Close"
                         >
-                            <IC.Close />
+                            <CancelIcon />
                         </button>
                     </div>
                 </div>
@@ -492,7 +396,7 @@ export default function ComposeEmail({
                                     setCc("");
                                 }}
                             >
-                                <IC.Close />
+                                <CancelIcon />
                             </button>
                         </div>
                     )}
@@ -514,17 +418,16 @@ export default function ComposeEmail({
                                     setBcc("");
                                 }}
                             >
-                                <IC.Close />
+                                <CancelIcon />
                             </button>
                         </div>
                     )}
 
                     <div className="cm-field">
-                        <label className="cm-label">Subject</label>
                         <input
                             className="cm-input"
                             type="text"
-                            placeholder="Add a subject"
+                            placeholder="Subject"
                             value={subject}
                             onChange={(e) => setSubject(e.target.value)}
                         />
@@ -582,7 +485,7 @@ export default function ComposeEmail({
                             }}
                             title="Insert link"
                         >
-                            <IC.Link />
+                            <LinkedIcon size={16}/>
                         </button>
                         {showLink && (
                             <div className="cm-link-popup">
@@ -607,7 +510,7 @@ export default function ComposeEmail({
                                     className="cm-link-x"
                                     onClick={() => setShowLink(false)}
                                 >
-                                    <IC.Close />
+                                    <CancelIcon />
                                 </button>
                             </div>
                         )}
@@ -674,7 +577,7 @@ export default function ComposeEmail({
                     <div className="cm-chips">
                         {files.map((f) => (
                             <div key={f.id} className="cm-chip">
-                                <IC.Attach />
+                                <FileIcon />
                                 <span className="cm-chip-name">{f.name}</span>
                                 <span className="cm-chip-size">
                                     {fmtBytes(f.size)}
@@ -687,7 +590,7 @@ export default function ComposeEmail({
                                         )
                                     }
                                 >
-                                    <IC.Close />
+                                    <CancelIcon />
                                 </button>
                             </div>
                         ))}
@@ -703,7 +606,7 @@ export default function ComposeEmail({
                             onClick={() => fileRef.current?.click()}
                             title="Attach file"
                         >
-                            <IC.Attach />
+                            <FileIcon />
                         </button>
                         <input
                             ref={fileRef}
@@ -713,23 +616,17 @@ export default function ComposeEmail({
                             onChange={handleFileChange}
                         />
                     </div>
-                    <div style={{display:"flex", gap:"12px"}}>
+                    <div className="cm-btn-container">
                         <button
-                            className={`cm-send${sending ? " cm-send--busy" : ""}`}
-                            onClick={handleSend}
-                            disabled={sending || !to.trim()}
+                            className={`btn cm-draft`}
+                            onClick={handleSaveDraft}
                         >
-                            {sending ? (
-                                <span className="cm-spinner" />
-                            ) : (
-                                <>
-                                    <IC.Send />
-                                    <span>Send</span>
-                                </>
-                            )}
+                            
+                            <DraftIcon />
+                            <span>Save Draft</span>
                         </button>
                         <button
-                            className={`cm-send${sending ? " cm-send--busy" : ""}`}
+                            className={`btn cm-send${sending ? " cm-send--busy" : ""}`}
                             onClick={handleSend}
                             disabled={sending || !to.trim()}
                         >
@@ -737,8 +634,8 @@ export default function ComposeEmail({
                                 <span className="cm-spinner" />
                             ) : (
                                 <>
-                                    <IC.Send />
-                                    <span>Save Draft</span>
+                                    <SentIcon />
+                                    <span>Send</span>
                                 </>
                             )}
                         </button>

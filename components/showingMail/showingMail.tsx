@@ -1,6 +1,6 @@
 "use client"
 import { useState, useRef, useEffect } from "react";
-import { CrossIcon, StarIcon, ThreeDotsIcon } from "@/public/icons";
+import { CancelIcon, StarIcon, ThreeDotsIcon } from "@/public/icons";
 import "./showingMail.css"
 import Image from "next/image";
 
@@ -27,7 +27,6 @@ const menuOptions = [
     { label: "Move to Spam", icon: "⚠", danger: true },
     { label: "Block Sender", icon: "🚫", danger: true },
     { label: "Mark as Unread", icon: "✉" },
-    { label: "Print", icon: "🖨" },
 ];
 
 export const ShowingMail = ({ selectedMail, closeDetail }: Props) => {
@@ -108,7 +107,7 @@ export const ShowingMail = ({ selectedMail, closeDetail }: Props) => {
                         onClick={closeDetail}
                         title="Close"
                     >
-                        <CrossIcon />
+                        <CancelIcon size={20}/>
                     </button>
                 </div>
             </div>

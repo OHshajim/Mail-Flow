@@ -1,39 +1,13 @@
-"use client";
-
-import { useState, useRef, useEffect } from "react";
 import "@/components/navbar/navbar.css";
 import Image from "next/image";
 import Link from "next/link";
-import { BlockIcon, DraftIcon, ThreeDotsIcon, MenuIcon } from "@/public/icons";
+import { MenuIcon } from "@/public/icons";
 
 interface NavbarProps {
     onMenuClick?: () => void; // Optional: opens mobile sidebar
 }
 
 export default function Navbar({ onMenuClick }: NavbarProps) {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        function handleClickOutside(e: MouseEvent) {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(e.target as Node)
-            ) {
-                setDropdownOpen(false);
-            }
-        }
-        document.addEventListener("mousedown", handleClickOutside);
-        return () =>
-            document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
-    const menuItems = [
-        { icon: "👤", label: "Filter", href: "#" },
-        { icon: <DraftIcon />, label: "Read", href: "#" },
-        { icon: <BlockIcon />, label: "Block", href: "#" },
-    ];
-
     return (
         <nav className="nb">
             <div className="nb-inner">
@@ -82,37 +56,6 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
                         />
                     </div>
 
-                    {/* 3-dot dropdown */}
-                    <div className="nb-dd-wrap" ref={dropdownRef}>
-                        <button
-                            className="nb-dots-btn"
-                            aria-label="More options"
-                            aria-haspopup="true"
-                            aria-expanded={dropdownOpen}
-                            onClick={() => setDropdownOpen((v) => !v)}
-                        >
-                            <div className="nb-dots-inner">
-                                <ThreeDotsIcon className="nb-dot" />
-                            </div>
-                        </button>
-                        <ul
-                            className={`nb-dd${dropdownOpen ? " open" : ""}`}
-                            role="menu"
-                        >
-                            {menuItems.map((item) => (
-                                <li key={item.label} role="menuitem">
-                                    <Link
-                                        href={item.href}
-                                        className="nb-dd-item"
-                                        onClick={() => setDropdownOpen(false)}
-                                    >
-                                        <span>{item.icon}</span>
-                                        {item.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
                 </div>
             </div>
         </nav>

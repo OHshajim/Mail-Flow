@@ -1,4 +1,3 @@
-import { descriptionCards } from '@/public/data';
 import "./description.css"
 
 const DescriptionCards = () => {

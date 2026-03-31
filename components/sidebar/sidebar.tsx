@@ -7,6 +7,7 @@ import "@/components/sidebar/sidebar.css";
 import { SettingIcon } from "@/public/icons";
 import { navGroups } from "@/public/data";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar({
     isMobileMenuOpen,
@@ -17,6 +18,7 @@ export default function Sidebar({
     closeMobileMenu: () => void;
     onComposeClick: () => void;
 }) {
+    const pathname = usePathname();
     const [active, setActive] = useState("Inbox");
     const [collapsed, setCollapsed] = useState(false);
     const [isMediumScreen, setIsMediumScreen] = useState(false);
@@ -109,10 +111,9 @@ export default function Sidebar({
                     >
                         <div
                             className={`sb-item ${
-                                active === group.label ? "active" : ""
+                                pathname === group.href ? "active" : ""
                             }`}
                             onClick={() => {
-                                setActive(group.label);
                                 if (isMobile) closeMobileMenu();
                             }}
                         >
